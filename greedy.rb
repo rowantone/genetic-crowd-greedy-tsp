@@ -1,3 +1,6 @@
+# Modified from project 3
+# to accept extra parameters
+
 #struct def
 City = Struct.new(:id, :x, :y, :next)
 
@@ -159,17 +162,17 @@ def output_file(array)
     out.puts "<div style=\"width: 300px; height: auto; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word; \">"
     out.puts "<p style = \"font-size: 12px; color: #666;\">hover over nodes/lines for info</p><p>"
     out.print "Frame #: "
-    out.puts outname[0..-6].to_i + 1
-    out.puts "</p><p>"
-    out.print "| -"
-    array.each { |city| out.print city.id + " - " }
-    out.puts "|"
+    out.puts (outname[0..-6].to_i)/10 + 1
     out.puts "</p>"
     td = get_total_distance(array)
     out.puts "<p>inserted: #{$last_inserted_node}<br>total distance: #{td.to_s[0..12]}</p>"
+    out.print "<p>| -"
+    array.each { |city| out.print city.id + " - " }
+    out.puts "|"
+    out.puts "</p>"
     out.puts "</div>"
     out.puts "</body>"
-    $outputcount += 1
+    $outputcount += 10
 end
 
 # --- begin main ---
