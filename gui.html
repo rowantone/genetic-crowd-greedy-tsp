@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<head>
+	<style>
+		body {
+			background-color: #eee;
+			font-size: 25px;
+		}
+		
+		h1 {
+			font-weight: 900;
+			font-style: italicize;
+		}
+		
+		iframe {
+			margin: 0 auto;
+			text-align: center;
+			width: 600px;
+			height: 850px;
+			border: 0;
+			clear: both;
+			overflow-y: initial;
+		}
+		
+		#tip {
+			z-index: 99; 
+			border: none; 
+			outline: none;
+			background-color: #333; 
+			color: #fff; 
+			cursor: pointer; 
+			padding: 15px; 
+			margin: 15px 35px 20px 5px;
+			border-radius: 30px;
+			font-size: 16px; 
+			font-weight: 900;
+			opacity: 0.9;
+		}
+		
+		.buttons {
+			clear:both;
+		}
+		
+		#fileInput {
+			width: 200px;
+			float: left;
+			padding: 10px;
+		}
+		
+		#frameInput {
+			width: 50px;
+			float: left;
+			padding: 10px;
+		}
+		
+		.left {
+			width: 50%;
+			height: 1000px;
+			float: left;
+		}
+		
+	</style>
+	<script>
+		var i = 0;
+		var input = "";
+		
+		function goBack() {
+		  if (i > 0) { i = i - 10; }
+		  var output = String(i);
+		  while (output.length < (4 || 2)) { output = "0" + output }
+		  document.getElementById('view').src = (input + "\\" + output + ".html");
+		}
+		
+		function goZero() {
+		  i = 0;
+		  document.getElementById('view').src = (input + "\\0000" + ".html");
+		}
+		
+		function goFrwd() {
+		  i = i + 10;
+		  var output = String(i);
+		  while (output.length < (4 || 2)) { output = "0" + output }
+		  document.getElementById('view').src = (input + "\\" + output + ".html");
+		}
+		
+		function setFolderName() {
+		  i = 0;
+		  input = document.getElementById("fileInput").value;
+		  document.getElementById('view').src = (input + "\\0000" + ".html");
+		}
+		
+		function jumpToFrame() {
+		  output = document.getElementById("frameInput").value;
+		  i = parseInt(output);
+		  output = String(i);
+		  while (output.length < (4 || 2)) { output = "0" + output }
+		  document.getElementById('view').src = (input + "\\" + output + ".html");
+		}
+	</script>
+</head>
+<body>
+	<div class = "left" style="width:580px;">
+		<iframe id = "view" src = "def.html"></iframe>
+	</div>
+	<div class = "left" style="border-left: 1px dashed #bbb; padding-left: 40px;">
+		<h1>Travelling Salesperson Problem</h1>
+		
+		<p>Enter Filename (no extension):</p>
+		<input id="fileInput" value="">
+		<button id="fileBtn" onclick="setFolderName()" style="display:none;">Button</button>
+		
+		<script>
+			var input = document.getElementById("fileInput");
+			
+			input.addEventListener("keyup", function(event) {
+				if (event.keyCode === 13) {
+					event.preventDefault();
+					document.getElementById("fileBtn").click();
+				}
+			});
+		</script>
+		
+		<div class = "buttons">
+			<button onclick="goBack()" id="tip" title="go back"> BACK </button>
+			<button onclick="goFrwd()" id="tip" title="go forward"> FRWD</button>
+			<button onclick="goZero()" id="tip" title="start"> FIRST </button>
+		</div>
+		
+		<p style = "margin: 2px;">Frame #</p>
+		<input id="frameInput" value="">
+		<button id="frameBtn" onclick="jumpToFrame()" style="display:none;">Button</button>
+
+		<p style="font-size: 12px; color: #666; clear:both; margin-top: 80px;">GUI created by Rowan Skellie</p>
+	
+		<script>
+			var input = document.getElementById("frameInput");
+			
+			input.addEventListener("keyup", function(event) {
+				if (event.keyCode === 13) {
+					event.preventDefault();
+					document.getElementById("frameBtn").click();
+				}
+			});
+		</script>
+	</div>
+</body>
